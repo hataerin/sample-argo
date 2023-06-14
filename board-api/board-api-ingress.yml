@@ -1,0 +1,46 @@
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress
+#metadata:
+#  name: demo-api-ingress
+#  namespace: board-api
+#  annotations:
+#    kubernetes.io/ingress.class: nginx
+#spec:
+#  rules:
+#    - host: "demo.com"
+#      http:
+#        paths:
+#          - pathType: Prefix
+#            path: "/"
+#            backend:
+#              service:
+#                name: board-api-headless-svc
+#                port:
+#                  number: 8001
+#---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: demo-api-ingress
+  namespace: board-api
+  #annotations:
+   # nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+    - host: "api.com"
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: board-api-headless-svc
+                port:
+                  number: 8000
+#          - pathType: Prefix
+#            path: /bar(/|$)(.*)
+#            backend:
+#              service:
+#                name: bar-service
+#                port:
+#                  number: 8080

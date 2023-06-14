@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: board-fe-headless-svc
+  namespace: board-fe
+spec:
+  selector:
+    app: board-fe
+  type: ClusterIP
+  clusterIP: None
+  ports:
+    - name: rest
+      port: 9000      # Inner container port
+      targetPort: 80  # Service forward port
+      protocol: TCP     # Protocol configuration
